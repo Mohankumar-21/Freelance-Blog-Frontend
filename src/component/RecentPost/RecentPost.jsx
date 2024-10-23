@@ -4,27 +4,27 @@ import './RecentPost.css';
 import { useNavigate } from "react-router-dom";
 
 const RecentPosts = () => {
-  const { blogData } = useContext(BlogContext); 
+  const { blogs } = useContext(BlogContext); 
   const navigate = useNavigate(); 
 
   const handleReviewClick = (id) => {
     navigate(`/${id}`); 
   };
 
-  const recentPosts = blogData.slice(-5); 
+  const recentPosts = blogs.slice(-5); 
 
   return (
     <div className="recent-posts">
       <h3>Latest Updates</h3>
         <div className="recent-blog-grid">
         {recentPosts.map((blog) => (
-          <div key={blog.id} className="blog-card-grid">
+          <div key={blog._id} className="blog-card-grid">
             <img src={blog.img} alt="blog" className="blog-card1-img" />
              <div className="recent-blog-overlay">
              <h5>{blog.title}</h5>
                   <p>{blog.star}</p>
-                  <button onClick={() => handleReviewClick(blog.id)}>
-                    {blog.btn}
+                  <button onClick={() => handleReviewClick(blog._id)}>
+                    Watch Review
                   </button>
              </div>
 

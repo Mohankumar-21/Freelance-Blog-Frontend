@@ -2,40 +2,41 @@ import React from "react";
 import imgSrc from "../../assets/back.jpg";
 import "./GenerePage.css";
 
-const GenereInfo = () => {
+const GenereInfo = ({blog}) => {
+
   return (
     <div className="genere-info-container">
       <div className="genere-image">
-        <img src={imgSrc} alt="img" />
+        <img src={blog.img} alt="img" />
       </div>
       <div className="genere-info">
         <div className="genere-item">
-          <strong>Genre:</strong> <span>Crime, Drama, Horror</span>
+          <strong>Genre:</strong> <span>{blog.details.genre}</span>
         </div>
         <div className="genere-item">
-          <strong>Created by:</strong> <span>J.S. Nandhini</span>
+          <strong>Created by:</strong> <span>{blog.details.createdBy}</span>
         </div>
         <div className="genere-item">
-          <strong>Directed by:</strong> <span>J.S. Nandhini</span>
+          <strong>Directed by:</strong> <span>{blog.details.directedBy}</span>
         </div>
         <div className="genere-item">
           <strong>Starring:</strong>{" "}
-          <span>Naveen Chandra, Sunaina Yella, Kanna Ravi</span>
+          <span>{blog.details.starring}</span>
         </div>
         <div className="genere-item">
-          <strong>Music by:</strong> <span>Ashwath</span>
+          <strong>Music by:</strong> <span>{blog.details.musicBy}</span>
         </div>
         <div className="genere-item">
-          <strong>Country of origin:</strong> <span>India</span>
+          <strong>Country of origin:</strong> <span>{blog.details.countryOfOrigin}</span>
         </div>
         <div className="genere-item">
-          <strong>Original language:</strong> <span>Tamil</span>
+          <strong>Original language:</strong> <span>{blog.details.originalLanguage}</span>
         </div>
         <div className="genere-item">
-          <strong>Seasons:</strong> <span>1</span>
+          <strong>Seasons:</strong> <span>{blog.details.seasons}</span>
         </div>
         <div className="genere-item">
-          <strong>No. of episodes:</strong> <span>10</span>
+          <strong>No. of episodes:</strong> <span>{blog.details.numberOfEpisodes}</span>
         </div>
       </div>
     </div>

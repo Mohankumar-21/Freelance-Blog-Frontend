@@ -6,7 +6,7 @@ import "./Home.css";
 import Social from "../SocialMedia/Social";
 
 const Home = () => {
-  const { selectedCategory, blogData } = useContext(BlogContext);
+  const { selectedCategory, blogData , blogs} = useContext(BlogContext);
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 8; 
   const navigate = useNavigate(); 
@@ -14,8 +14,8 @@ const Home = () => {
   // Filter blog data based on selected category
   const filteredData =
     selectedCategory === "All"
-      ? blogData
-      : blogData.filter((blog) => blog.category === selectedCategory);
+      ? blogs
+      : blogs.filter((blog) => blog.category === selectedCategory);
 
   // Calculate indices for pagination
   const indexOfLastBlog = currentPage * blogsPerPage;
@@ -64,13 +64,13 @@ const Home = () => {
         <div className="blog-content">
           <div className="blog-grid">
             {currentBlogs.map((blog) => (
-              <div key={blog.id} className="blog-card">
+              <div key={blog._id} className="blog-card">
                 <img src={blog.img} alt="Blog" className="blog-card-img" />
                 <div className="blog-card-overlay">
                   <h5>{blog.title}</h5>
                   <p>{blog.star}</p>
-                  <button onClick={() => handleReviewClick(blog.id)}>
-                    {blog.btn}
+                  <button onClick={() => handleReviewClick(blog._id)}>
+                     Watch review
                   </button>
                 </div>
               </div>
