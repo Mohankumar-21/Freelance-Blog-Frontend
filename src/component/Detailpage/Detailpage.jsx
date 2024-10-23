@@ -45,9 +45,6 @@ const Detailpage = () => {
           </div>
         </div>
       </div>
-      <div className="socil">
-        <SocialMedia />
-      </div>
     </div>
     <GenerePage />
     </>

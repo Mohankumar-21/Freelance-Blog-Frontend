@@ -162,6 +162,7 @@ const blogData = [
 ];
 
 const Context = ({ children }) => {
+  
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [iconCount, setIconCount] = useState(5); 
 

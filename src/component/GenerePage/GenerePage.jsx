@@ -35,14 +35,40 @@ const GenerePage = () => {
     Non amet felis dignissim pharetra vestibulum quis auctor. Urna dignissim gravida sodales ornare.
   `;
 
-  const splittedParagraph = splitParagraphIntoEqualParts(longText, 2); 
+  const splittedParagraph = splitParagraphIntoEqualParts(longText, 3); 
 
   return (
     <div className="genere-container">
       <div className="genere-main-content">
         <div className="description">
           <h1>Tamil language horror crime drama television web series</h1>
-          <div className="para-content" dangerouslySetInnerHTML={{ __html: splittedParagraph }} />
+           <div>
+               <div className="para-content">
+                  <h3>Story :</h3>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, atque esse. Magni perferendis culpa minima. Eum sit laborum necessitatibus enim dolorem, consequatur dicta facere voluptate exercitationem, eligendi voluptas rerum labore.
+                  Illum mollitia animi doloribus quo corporis voluptatibus esse, impedit ut pariatur debitis eos dolore. Sunt neque officia inventore exercitationem, iste repudiandae ab? Ipsam eos possimus provident est eligendi aliquid ducimus!</p>
+               </div>
+               <div className="para-content">
+                  <h3>Plus Point :</h3>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, atque esse. Magni perferendis culpa minima. Eum sit laborum necessitatibus enim dolorem, consequatur dicta facere voluptate exercitationem, eligendi voluptas rerum labore.
+                  Illum mollitia animi doloribus quo corporis voluptatibus esse, impedit ut pariatur debitis eos dolore. Sunt neque officia inventore exercitationem, iste repudiandae ab? Ipsam eos possimus provident est eligendi aliquid ducimus!</p>
+               </div>
+               <div className="para-content">
+                  <h3>Minus Point :</h3>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, atque esse. Magni perferendis culpa minima. Eum sit laborum necessitatibus enim dolorem, consequatur dicta facere voluptate exercitationem, eligendi voluptas rerum labore.
+                  Illum mollitia animi doloribus quo corporis voluptatibus esse, impedit ut pariatur debitis eos dolore. Sunt neque officia inventore exercitationem, iste repudiandae ab? Ipsam eos possimus provident est eligendi aliquid ducimus!</p>
+               </div>
+               <div className="para-content">
+                  <h3>Technical Aspect :</h3>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, atque esse. Magni perferendis culpa minima. Eum sit laborum necessitatibus enim dolorem, consequatur dicta facere voluptate exercitationem, eligendi voluptas rerum labore.
+                  Illum mollitia animi doloribus quo corporis voluptatibus esse, impedit ut pariatur debitis eos dolore. Sunt neque officia inventore exercitationem, iste repudiandae ab? Ipsam eos possimus provident est eligendi aliquid ducimus!</p>
+               </div>
+               <div className="para-content">
+                  <h3>Final Review :</h3>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, atque esse. Magni perferendis culpa minima. Eum sit laborum necessitatibus enim dolorem, consequatur dicta facere voluptate exercitationem, eligendi voluptas rerum labore.
+                  Illum mollitia animi doloribus quo corporis voluptatibus esse, impedit ut pariatur debitis eos dolore. Sunt neque officia inventore exercitationem, iste repudiandae ab? Ipsam eos possimus provident est eligendi aliquid ducimus!</p>
+               </div>
+           </div>
         </div>
         <div className="gener">
           <GenereInfo />

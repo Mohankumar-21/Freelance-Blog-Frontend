@@ -1,6 +1,7 @@
 .Home-align {
-    display: flex;
+    display: grid;
     margin: 5px 40px;
+    grid-template-columns: 1fr 5fr 1fr
 }
 
 .social-container {
@@ -9,6 +10,7 @@
     margin-left: 30px;
     margin-right: -70px;
 }
+
 
 .blog-content {
     flex: 3; 
@@ -60,9 +62,12 @@
 }
 
 .pagination {
-    margin-top: 20px;
+    margin-top: 25px;
     display: flex;
     justify-content: center;
+    background-color: #ffffff;
+    padding: 5px;
+  
 }
 
 .pagination button {
@@ -93,6 +98,12 @@
     background-color: #ffd523;
     color: black;
 }
+
+.page-button-align{
+    width: 80px !important;
+    border-radius: 5px !important;
+ 
+}
 @media screen and (max-width:1020px){
     .social-container {
         margin-left: 10px;
@@ -101,6 +112,9 @@
 }
 
 @media screen and (max-width:720px){
+    .Home-align{
+        grid-template-columns: 1fr 2fr;
+    }
     .social-container {
         margin-left: 5px;
         margin-right: -5px;
@@ -109,6 +123,7 @@
 
 @media screen and (max-width:600px) {
     .Home-align {
+     grid-template-columns: 1fr;
       flex-direction: column;
       margin: 15px 20px;
     }
@@ -135,8 +150,6 @@
     .blog-grid{
         display: flex;
         flex-direction: column;
-       
-        align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
     }
 }

@@ -23,6 +23,7 @@ const Heading = () => {
             <Nav.Link as="button" className='btn-align' onClick={() => changeCategory('Bollywood')}>Bollywood</Nav.Link>
             <Nav.Link as="button" className='btn-align' onClick={() => changeCategory('Tollywood')}>Tollywood</Nav.Link>
             <Nav.Link as="button" className='btn-align' onClick={() => changeCategory('Hollywood')}>Hollywood</Nav.Link>
+            <Nav.Link as="button" className='btn-align' onClick={() => changeCategory('tamilDub')}>Tamil dubbed</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

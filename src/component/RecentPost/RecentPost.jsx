@@ -11,7 +11,7 @@ const RecentPosts = () => {
     navigate(`/${id}`); 
   };
 
-  const recentPosts = blogData.slice(-3); 
+  const recentPosts = blogData.slice(-5); 
 
   return (
     <div className="recent-posts">
