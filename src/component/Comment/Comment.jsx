@@ -1,25 +1,73 @@
-import React, { useState } from 'react';
-import './Comment.css';
+import React, { useEffect, useState } from "react";
+import io from "socket.io-client";
+import "./Comment.css";
 
-const Comment = () => {
-  const [comment, setComment] = useState('');
-  const [sortOrder, setSortOrder] = useState('latest');
+const socket = io("http://localhost:8000", {
+  transports: ["websocket", "polling"], 
+  withCredentials: true,
+});
 
-  const handleSubmit = (e) => {
+
+const Comment = ({ blogId }) => {
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+  const [sortOrder, setSortOrder] = useState("latest");
+
+
+  console.log(comments)
+  useEffect(() => {
+    socket.on("newComment", (newComment) => {
+      setComments((prevComments) => [...prevComments, newComment]);
+    });
+
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/api/comments?blogId=${blogId}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          setComments(data);
+        } else {
+          setComments([]);
+        }
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
+    };
+
+    fetchComments();
+
+    return () => {
+      socket.off("newComment");
+    };
+  }, [blogId]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted comment:", comment);
-    setComment(''); 
+    const newComment = { blogId, comment };
+    await fetch("http://localhost:8000/api/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newComment),
+    });
+    socket.emit("newComment", { comment });
+    setComment("");
   };
 
   const handleSortChange = (e) => {
-    setSortOrder(e.target.value); 
-    console.log("Selected sorting order:", e.target.value);
+    setSortOrder(e.target.value);
   };
+
+  const sortedComments = sortOrder === "latest" ? comments : comments.reverse();
 
   return (
     <div className="comment-box">
       <div className="comment-header">
-        <h4>0 Comments</h4>
+        <h4>{comments.length} Comments</h4>
         <div className="sort-container">
           <span className="sort-label">Sort by : </span>
           <select className="sort-dropdown" value={sortOrder} onChange={handleSortChange}>
@@ -29,11 +77,11 @@ const Comment = () => {
         </div>
       </div>
 
-      <hr className="comment-divider" /> 
+      <hr className="comment-divider" />
 
       <form onSubmit={handleSubmit} className="comment-form">
         <img
-          src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" 
+          src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
           alt="avatar"
           className="avatar-img"
         />
@@ -48,6 +96,21 @@ const Comment = () => {
       </form>
 
       <hr className="comment-divider" />
+
+      <ul className="comment-list">
+        {sortedComments.map((c, index) => (
+          <li key={index} className="comment-item">
+            <img
+              src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+              alt="avatar"
+              className="avatar-img"
+            />
+            <div className="comment-content">
+              <div className="comment-text">{c.comment}</div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

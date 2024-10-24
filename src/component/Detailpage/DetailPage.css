@@ -58,6 +58,46 @@
  
 }
 
+
+/* CSS for the stars in the detail page */
+.filled-star {
+  color: gold;
+  font-size: 24px;
+  margin-right: 2px;
+}
+
+.empty-star {
+  color: lightgray;
+  font-size: 24px;
+  margin-right: 2px;
+}
+
+/* Optional: Adjustments for the rating and button alignment */
+.rating-align {
+  display: flex;
+  align-items: center;
+}
+
+.rating-align button {
+
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.rating-align button:hover {
+  background-color: #0056b3;
+}
+
+/* .Rating-blog-align{
+  background-color: #2C2E43;
+  margin-right: 20px;
+} */
+
 @media screen and (min-width: 1240px) {
   .socil{
     position: relative;

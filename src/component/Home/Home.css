@@ -99,11 +99,29 @@
     color: black;
 }
 
-.page-button-align{
+/* .page-button-align{
     width: 80px !important;
     border-radius: 5px !important;
  
-}
+} */
+
+.star-rating {
+    display: inline-block;
+  }
+  
+  .star {
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .filled-star {
+    color: gold; 
+  }
+  
+  .empty-star {
+    color: lightgray; 
+  }
+  
 @media screen and (max-width:1020px){
     .social-container {
         margin-left: 10px;

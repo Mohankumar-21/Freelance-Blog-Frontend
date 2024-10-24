@@ -1,23 +1,38 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BlogContext } from "../../context/Context";
 import Heading from "../Heading/Heading";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"; // Importing React Icons
 import "./Home.css";
 import Social from "../SocialMedia/Social";
 
 const Home = () => {
-  const { selectedCategory, blogData , blogs} = useContext(BlogContext);
+  const { selectedCategory, blogs, searchQuery } = useContext(BlogContext);
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 8; 
-  const navigate = useNavigate(); 
+  const [blogsPerPage, setblogPerPage] = useState(8);
+  const navigate = useNavigate();
 
-  // Filter blog data based on selected category
-  const filteredData =
-    selectedCategory === "All"
-      ? blogs
-      : blogs.filter((blog) => blog.category === selectedCategory);
+  useEffect(() => {
+    const updateIconSize = () => {
+      if (window.innerWidth <= 608) {
+        setblogPerPage(4);
+      } else {
+        setblogPerPage(8);
+      }
+    };
 
-  // Calculate indices for pagination
+    updateIconSize();
+
+    window.addEventListener("resize", updateIconSize);
+
+    return () => window.removeEventListener("resize", updateIconSize);
+  }, []);
+
+  // Combine filtering for category and search query
+  const filteredData = selectedCategory === "All"
+    ? blogs.filter(blog => blog.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    : blogs.filter(blog => blog.category === selectedCategory && blog.title.toLowerCase().includes(searchQuery.toLowerCase()));
+
   const indexOfLastBlog = currentPage * blogsPerPage;
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   const currentBlogs = filteredData.slice(indexOfFirstBlog, indexOfLastBlog);
@@ -27,34 +42,54 @@ const Home = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleReviewClick = (id) => {
-    navigate(`/${id}`); 
+    navigate(`/${id}`);
   };
 
   const getPaginationRange = () => {
     let startPage, endPage;
-
-    if (totalPages <= 5) {
+  
+    // Show only 4 pages
+    const totalPagesToShow = 4;
+    const midPoint = Math.ceil(totalPagesToShow / 2);
+  
+    if (totalPages <= totalPagesToShow) {
       startPage = 1;
       endPage = totalPages;
     } else {
-      const midPoint = Math.ceil(5 / 2);
       if (currentPage <= midPoint) {
         startPage = 1;
-        endPage = 5;
+        endPage = totalPagesToShow;
       } else if (currentPage + midPoint - 1 >= totalPages) {
-        startPage = totalPages - 4;
+        startPage = totalPages - (totalPagesToShow - 1);
         endPage = totalPages;
       } else {
         startPage = currentPage - midPoint + 1;
         endPage = currentPage + midPoint - 1;
       }
     }
+  
     return { startPage, endPage };
   };
+  
 
   const { startPage, endPage } = getPaginationRange();
 
-  return ( 
+  const renderStars = (rating) => {
+    return (
+      <div className="star-rating">
+        {Array.from({ length: 5 }, (_, i) => (
+          <span
+            key={i}
+            className={`star ${i < rating ? "filled-star" : "empty-star"}`}
+          >
+            ★
+          </span>
+        ))}
+      </div>
+    );
+  };
+
+  return (
     <div>
       <Heading />
       <div className="Home-align">
@@ -62,15 +97,16 @@ const Home = () => {
           <Social />
         </div>
         <div className="blog-content">
+        
           <div className="blog-grid">
             {currentBlogs.map((blog) => (
               <div key={blog._id} className="blog-card">
                 <img src={blog.img} alt="Blog" className="blog-card-img" />
                 <div className="blog-card-overlay">
                   <h5>{blog.title}</h5>
-                  <p>{blog.star}</p>
+                  <div>{renderStars(blog.star)}</div>
                   <button onClick={() => handleReviewClick(blog._id)}>
-                     Watch review
+                    Watch review
                   </button>
                 </div>
               </div>
@@ -78,11 +114,12 @@ const Home = () => {
           </div>
 
           <div className="pagination">
-            <button className="page-button-align"
-              onClick={() => paginate(currentPage - 1)} 
+            <button
+              className="page-button-align"
+              onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
             >
-              Previous
+              <IoIosArrowBack /> {/* React Icon for Previous */}
             </button>
             {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
               <button
@@ -93,11 +130,12 @@ const Home = () => {
                 {startPage + i}
               </button>
             ))}
-            <button className="page-button-align"
-              onClick={() => paginate(currentPage + 1)} 
+            <button
+              className="page-button-align"
+              onClick={() => paginate(currentPage + 1)}
               disabled={currentPage === totalPages}
             >
-              Next
+              <IoIosArrowForward /> {/* React Icon for Next */}
             </button>
           </div>
         </div>

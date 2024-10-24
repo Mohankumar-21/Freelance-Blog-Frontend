@@ -41,7 +41,7 @@ const GenerePage = ({blog}) => {
           <GenereInfo blog={blog} />
         </div>
         <div className="user-comment-box">
-          <Comment />
+          <Comment blogId={blog._id} />
         </div>
       </div>
       <div className="Latest-posts">

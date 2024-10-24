@@ -32,12 +32,14 @@ const GenereInfo = ({blog}) => {
         <div className="genere-item">
           <strong>Original language:</strong> <span>{blog.details.originalLanguage}</span>
         </div>
-        <div className="genere-item">
+        {blog.details.seasons!==0 &&  (<div className="genere-item">
           <strong>Seasons:</strong> <span>{blog.details.seasons}</span>
-        </div>
+        </div>)}
+        {blog.details.numberOfEpisodes!==0 && (
         <div className="genere-item">
           <strong>No. of episodes:</strong> <span>{blog.details.numberOfEpisodes}</span>
         </div>
+)}
       </div>
     </div>
   );

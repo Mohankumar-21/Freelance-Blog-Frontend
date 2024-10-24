@@ -10,6 +10,7 @@ const Context = ({ children }) => {
   const [blogs, setBlogs] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [iconCount, setIconCount] = useState(5); 
+  const [searchQuery, setSearchQuery] = useState(""); 
 
   const changeCategory = (category) => {
     setSelectedCategory(category);
@@ -38,7 +39,7 @@ const Context = ({ children }) => {
 
   return (
     <BlogContext.Provider
-      value={{ selectedCategory, changeCategory, iconCount,blogs, setIconCount }}
+      value={{ selectedCategory, changeCategory, iconCount,blogs, setIconCount, searchQuery, setSearchQuery,}}
     >
       {children}
     </BlogContext.Provider>
