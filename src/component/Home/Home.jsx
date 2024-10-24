@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     const updateIconSize = () => {
       if (window.innerWidth <= 608) {
-        setblogPerPage(4);
+        setblogPerPage(2);
       } else {
         setblogPerPage(8);
       }
@@ -45,13 +45,14 @@ const Home = () => {
     navigate(`/${id}`);
   };
 
+  // Function to get range of pages for pagination
   const getPaginationRange = () => {
     let startPage, endPage;
-  
-    // Show only 4 pages
-    const totalPagesToShow = 4;
+
+ 
+    const totalPagesToShow = 2;
     const midPoint = Math.ceil(totalPagesToShow / 2);
-  
+
     if (totalPages <= totalPagesToShow) {
       startPage = 1;
       endPage = totalPages;
@@ -59,7 +60,7 @@ const Home = () => {
       if (currentPage <= midPoint) {
         startPage = 1;
         endPage = totalPagesToShow;
-      } else if (currentPage + midPoint - 1 >= totalPages) {
+      } else if (currentPage + midPoint - 1 >=totalPages) {
         startPage = totalPages - (totalPagesToShow - 1);
         endPage = totalPages;
       } else {
@@ -67,10 +68,9 @@ const Home = () => {
         endPage = currentPage + midPoint - 1;
       }
     }
-  
+
     return { startPage, endPage };
   };
-  
 
   const { startPage, endPage } = getPaginationRange();
 
@@ -97,7 +97,6 @@ const Home = () => {
           <Social />
         </div>
         <div className="blog-content">
-        
           <div className="blog-grid">
             {currentBlogs.map((blog) => (
               <div key={blog._id} className="blog-card">
@@ -114,13 +113,25 @@ const Home = () => {
           </div>
 
           <div className="pagination">
+         
+            <button
+              className="page-button-align"
+              onClick={() => paginate(1)}
+              disabled={currentPage === 1}
+            >
+              First
+            </button>
+
+          
             <button
               className="page-button-align"
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
             >
-              <IoIosArrowBack /> {/* React Icon for Previous */}
+              <IoIosArrowBack /> 
             </button>
+
+      
             {Array.from({ length: endPage - startPage + 1 }, (_, i) => (
               <button
                 key={startPage + i}
@@ -130,12 +141,22 @@ const Home = () => {
                 {startPage + i}
               </button>
             ))}
+
+        
             <button
               className="page-button-align"
               onClick={() => paginate(currentPage + 1)}
               disabled={currentPage === totalPages}
             >
-              <IoIosArrowForward /> {/* React Icon for Next */}
+              <IoIosArrowForward /> 
+            </button>
+
+            <button
+              className="page-button-align"
+              onClick={() => paginate(totalPages)}
+              disabled={currentPage === totalPages}
+            >
+              Last
             </button>
           </div>
         </div>

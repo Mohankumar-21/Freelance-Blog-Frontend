@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { BlogContext } from "../../context/Context";
 import logo from "../../assets/logo6.png";
 import "./Detailpage.css";
+import Heading from '../../component/Heading/Heading'
 import GenerePage from "../GenerePage/GenerePage";
 import RatingModal from "../RatingModal/RatingModal"; // Import the RatingModal
 
@@ -32,6 +33,7 @@ const Detailpage = () => {
 
   return (
     <>
+  
       <div className="DBlog-Container">
         <div className="videoDescription">
           <h2>{blog.title}</h2>

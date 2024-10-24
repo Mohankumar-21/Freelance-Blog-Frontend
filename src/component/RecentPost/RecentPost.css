@@ -73,6 +73,23 @@
     font-weight: 500;
 }
 
+@keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .recent-blog-overlay h5 {
+    white-space: nowrap; 
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    animation: marquee 8s linear infinite; /* 8 seconds for the full scroll */
+  }
+  
 
 @media screen and (max-width:600px) {
     .blog-card1-img{
